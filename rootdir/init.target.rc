@@ -52,6 +52,21 @@ on init
     chmod 0660 /dev/mi-camera-hal2vendor
     chown system system /sys/class/touch/tp_dev/fod_status
 
+    # Boot time FS tune
+    write /sys/block/sda/queue/iostats 0
+    write /sys/block/sda/queue/scheduler cfq
+    write /sys/block/sda/queue/iosched/slice_idle 0
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/nr_requests 256
+    write /sys/block/sdf/queue/iostats 0
+    write /sys/block/sdf/queue/scheduler cfq
+    write /sys/block/sdf/queue/iosched/slice_idle 0
+    write /sys/block/sdf/queue/read_ahead_kb 2048
+    write /sys/block/sdf/queue/nr_requests 256
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
+
 # Add a cpuset for the camera daemon
 # We want all cores for camera
     mkdir /dev/cpuset/camera-daemon
@@ -100,6 +115,10 @@ on fs
     chown system system /persist/rfs/msm/slpi
     chown system system /persist/rfs/msm/mpss/server_check.txt
     chown system system /persist/rfs/shared/server_info.txt
+
+on late-fs
+    # Boot time FS tune
+    write /sys/block/dm-3/queue/read_ahead_kb 2048
 
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
@@ -152,6 +171,22 @@ on property:sys.boot_completed=1
 # For cpusets initialize for Silver Only first and then Silver + Gold
 # Silver Only configuration cannot work with 0-7
 on boot
+
+    # Runtime FS tuning: as we have init boottime setting and kernel patch setting
+    # default readahead to 2048KB. We should adjust the setting upon boot_complete
+    # for runtime performance
+
+    write /sys/block/sda/queue/read_ahead_kb 128
+    write /sys/block/sda/queue/nr_requests 128
+    write /sys/block/sda/queue/iostats 1
+    write /sys/block/sdf/queue/read_ahead_kb 128
+    write /sys/block/sdf/queue/nr_requests 128
+    write /sys/block/sdf/queue/iostats 1
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+    write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/dm-2/queue/read_ahead_kb 128
+    write /sys/block/dm-3/queue/read_ahead_kb 128
+
     chown system system /sys/kernel/hbtp/display_pwr
     chown system system /sys/class/leds/white/brightness
     chown system system /sys/class/leds/white/blink

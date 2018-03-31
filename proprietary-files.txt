@@ -4,12 +4,10 @@
 -vendor/lib/libkeymasterprovision.so
 -vendor/lib/libkeymasterutils.so
 -vendor/lib/libQSEEComAPI.so
--vendor/lib/vendor.qti.hardware.fm@1.0.so
 -vendor/lib64/libkeymasterdeviceutils.so
 -vendor/lib64/libkeymasterprovision.so
 -vendor/lib64/libkeymasterutils.so
 -vendor/lib64/libQSEEComAPI.so
--vendor/lib64/vendor.qti.hardware.fm@1.0.so
 vendor/bin/acpi
 vendor/bin/adpl
 vendor/bin/adsprpcd
@@ -1990,6 +1988,16 @@ vendor/bin/hw/vendor.qti.hardware.alarm@1.0-service
 vendor/etc/init/vendor.qti.hardware.alarm@1.0-service.rc
 vendor/lib64/hw/vendor.qti.hardware.alarm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
+
+# FM
+-lib/vendor.qti.hardware.fm@1.0.so
+-lib64/vendor.qti.hardware.fm@1.0.so
+-vendor/lib/vendor.qti.hardware.fm@1.0.so
+-vendor/lib64/vendor.qti.hardware.fm@1.0.so
+lib/fm_helium.so
+lib/libfm-hci.so
+lib64/fm_helium.so
+lib64/libfm-hci.so
 
 # OMX - from enchilada - PKQ1.180716.001
 vendor/lib/vndk/libstagefright_omx.so|07e31aafcc4deee17e195f300ea31372316adc19

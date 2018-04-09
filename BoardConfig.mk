@@ -94,9 +94,6 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/vintf/device_compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/vintf/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/vintf/framework_compatibility_matrix.xml
 
-# Lights
-TARGET_PROVIDES_LIBLIGHT := true
-
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456

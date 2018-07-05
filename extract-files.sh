@@ -64,4 +64,10 @@ sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT
 sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib/libPui.so
 sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib64/libPui.so
 
+#
+# Correct android.hidl.manager@1.0-java jar name
+#
+sed -i "s|name=\"android.hidl.manager-V1.0-java|name=\"android.hidl.manager@1.0-java|g" \
+    "$BLOB_ROOT"/etc/permissions/qti_libpermissions.xml
+
 "$MY_DIR"/setup-makefiles.sh

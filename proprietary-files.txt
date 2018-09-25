@@ -2015,6 +2015,10 @@ vendor/lib/vendor.qti.hardware.iop@1.0.so|32549ec4f679efb099158aac200b238e837003
 vendor/lib/vendor.qti.hardware.iop@2.0.so|925c43e2d241057683e85dd9ea0670497be7c568
 vendor/lib/vendor.qti.hardware.perf@1.0.so|e2313e4c7992367f9b9597af725345c9cc256e06
 
+# Audio - from enchilada - PKQ1.180716.001
+vendor/lib64/soundfx/libvolumelistener.so|2dffcd0bde20f5f1830918146c9f40c02bbbae9f
+vendor/lib/soundfx/libvolumelistener.so|117f8b7d834b4587dc8c8c5d15fada85b877ed26
+
 # Misc dependencies
 lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so:vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so
 lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so:vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so

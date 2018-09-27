@@ -350,7 +350,6 @@ vendor/bin/vndservicemanager
 vendor/bin/vppservice
 vendor/bin/vsimd
 vendor/bin/wc
-vendor/bin/wcnss_filter
 vendor/bin/wdsdaemon
 vendor/bin/which
 vendor/bin/whoami

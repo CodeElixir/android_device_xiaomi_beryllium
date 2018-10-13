@@ -79,7 +79,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # RCS and IMS
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rcs.supported=0 \
-    persist.vendor.ims.disableUserAgent=0
+    persist.vendor.ims.disableUserAgent=0 \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1 
 
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -102,5 +104,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
-
 

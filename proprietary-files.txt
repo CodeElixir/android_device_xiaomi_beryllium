@@ -719,8 +719,6 @@ vendor/firmware/ipa_fws.mdt
 vendor/firmware/leia_pfp_470.fw
 vendor/firmware/leia_pm4_470.fw
 vendor/firmware/tas2559_uCDSP.bin
-vendor/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
-vendor/firmware/wlan/qca_cld/wlan_mac.bin
 vendor/lib/android.hardware.automotive.vehicle@2.0-manager-lib.so
 vendor/lib/camera.device@1.0-impl.so
 vendor/lib/camera.device@3.2-impl.so

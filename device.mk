@@ -26,6 +26,7 @@ PRODUCT_PACKAGES += \
 
 # Properties
 -include $(LOCAL_PATH)/vendor-props.mk
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
 # Screen density
 PRODUCT_AAPT_CONFIG := normal

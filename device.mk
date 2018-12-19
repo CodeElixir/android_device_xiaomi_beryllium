@@ -123,9 +123,27 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-goodix.kl \
     $(LOCAL_PATH)/keylayout/sdm845-tavil-snd-card_Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/sdm845-tavil-snd-card_Button_Jack.kl
 
-# default.prop
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.allow.mock.location=1 \
-    ro.debuggable=1 \
+# Props
+
+# Dalvik
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.heapstartsize=16m \
+    dalvik.vm.heapgrowthlimit=256m \
+    dalvik.vm.heapsize=512m \
+    dalvik.vm.heaptargetutilization=0.75 \
+    dalvik.vm.heapminfree=4m \
+    dalvik.vm.heapmaxfree=8m
+
+# Props for userdebug and eng builds
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
+# Set default log size on userdebug/eng build to 16M
+PRODUCT_PROPERTY_OVERRIDES += ro.logd.size=16M
+
+# prop,default overides
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
-    persist.sys.usb.config=mtp,adb
+    ro.secure=0 \
+    persist.sys.usb.config=mtp,adb \
+    ro.allow.mock.location=0 \
+    ro.debuggable=1 
+endif

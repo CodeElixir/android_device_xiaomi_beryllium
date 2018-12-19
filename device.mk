@@ -50,10 +50,6 @@ PRODUCT_PACKAGES += \
     libqcomfm_jni \
     qcom.fmradio
 
-# Common init scripts
-PRODUCT_PACKAGES += \
-    init.qcom.rc
-
 # Display
 PRODUCT_PACKAGES += \
     libvulkan
@@ -111,6 +107,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libstdc++.vendor \
     libpowermanager.vendor 
+
+# Ramdisk
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    init.batteryd.rc \
+    init.msm.usb.configfs.rc \
+    init.qcom.rc \
+    init.qcom.usb.rc \
+    init.remosaic.rc \
+    init.target.rc \
+    ueventd.qcom.rc 
 
 # QTI
 PRODUCT_COPY_FILES += \

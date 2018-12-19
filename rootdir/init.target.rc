@@ -45,6 +45,7 @@ on init
     write /dev/stune/system-background/schedtune.colocate 0
     write /dev/stune/foreground/schedtune.colocate 0
     write /dev/stune/top-app/schedtune.colocate 1
+    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
     chown system camera /dev/mi-camera-vendor2hal
     chown system camera /dev/mi-camera-hal2vendor
@@ -78,6 +79,17 @@ on fs
     chmod 644 /mnt/vendor/persist/audio/us_manual_cal
     mkdir /mnt/vendor/persist/wlan_bt 0755 system system
     chmod 644 /persist/audio/us_manual_cal
+    chown root system /sys/bus/i2c/devices/3-0049/grip_enable
+    on property:sys.tp.grip_enable=90
+        write sys/bus/i2c/devices/3-0049/grip_area 100
+    on property:sys.tp.grip_enable=270
+        write sys/bus/i2c/devices/3-0049/grip_area 100
+    on property:sys.tp.grip_enable=0
+        write sys/bus/i2c/devices/3-0049/grip_area 30
+    on property:sys.tp.grip_enable=1
+        write sys/bus/i2c/devices/3-0049/grip_area 30
+    on property:sys.tp.grip_enable=180
+        write sys/bus/i2c/devices/3-0049/grip_area 30
 
     chown system system /persist/rfs
     chown system system /persist/rfs/msm
@@ -130,6 +142,14 @@ on post-fs-data
 
 on property:ro.boot.dp=0x0
 	write  /sys/bus/platform/devices/c440000.qcom,spmi:qcom,pm8998@0:qcom,power-on@800/pshold_reboot 7
+
+# add charge_logger service for dump charge message
+service charge_logger /vendor/bin/charge_logger
+    class last_start
+    user system
+    group system system wakelock
+    disabled
+    oneshot
 
 on property:sys.boot_completed=1
     start charge_logger
@@ -196,6 +216,11 @@ on boot && property:persist.vendor.usb.controller.default=*
 on property:vendor.usb.controller=*
     setprop sys.usb.controller ${vendor.usb.controller}
 
+#start camera server as daemon
+#service qcamerasvr /system/bin/mm-qcamera-daemon
+#    class late_start
+#    user camera
+#    group camera system inet input graphics
 #pd-mapper
 service vendor.pd_mapper /vendor/bin/pd-mapper
     class core
@@ -245,6 +270,17 @@ on charger
 	start charge_logger
     setprop sys.usb.configfs 1
 
+## import cne init file
+#on post-fs
+#    export LD_PRELOAD /vendor/lib/libNimsWrap.so
+#
+## Allow usb charging to be disabled peristently
+#on property:persist.usb.chgdisabled=1
+#    write /sys/class/power_supply/battery/charging_enabled 0
+#
+#on property:persist.usb.chgdisabled=0
+#    write /sys/class/power_supply/battery/charging_enabled 1
+
 service vendor.qseecomd /vendor/bin/qseecomd
     class core
     user root
@@ -260,6 +296,15 @@ service hdcp_srm /vendor/bin/hdcp_srm
     user system
     group system
 
+#service mpdecision /system/vendor/bin/mpdecision --avg_comp
+#   user root
+#   disabled
+#
+#service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
+#   user system
+#   group system
+#   disabled
+#
 service thermal-engine /system/vendor/bin/thermal-engine -T
    class main
    user root
@@ -268,6 +313,19 @@ service thermal-engine /system/vendor/bin/thermal-engine -T
    socket thermal-recv-passive-client stream 0666 system system
    socket thermal-send-rule stream 0660 system system
    group root
+
+#service security-check1 /sbin/security_boot_check system
+#    class core
+#    oneshot
+#
+#service security-check2 /sbin/security_boot_check recovery
+#    class core
+#    oneshot
+#
+#service time_daemon /system/vendor/bin/time_daemon
+#   class late_start
+#   user root
+#   group root
 
 service adsprpcd /vendor/bin/adsprpcd
    class main
@@ -279,6 +337,73 @@ service cdsprpcd /vendor/bin/cdsprpcd
    user system
    group system
 
+#service audiod /vendor/bin/audiod
+#   class late_start
+#   user system
+#   group system
+#
+#service usf_tester /vendor/bin/usf_tester
+#    user system
+#    group system inet
+#    disabled
+#
+#service usf_epos /vendor/bin/usf_epos
+#    user system
+#    group system inet
+#    disabled
+#
+#service usf_gesture /vendor/bin/usf_gesture
+#    user system
+#    group system inet
+#    disabled
+#
+
+#service usf_sync_gesture /system/bin/usf_sync_gesture
+#    user system
+#    group system inet
+#    disabled
+#
+
+#service usf_p2p /system/bin/usf_p2p
+#    user system
+#    group system inet
+#    disabled
+#
+#service usf_hovering /vendor/bin/usf_hovering
+#    user system
+#    group system inet
+#    disabled
+#
+#service usf_proximity /system/bin/usf_proximity
+#    user system
+#    group system inet
+#    disabled
+#
+#service usf-post-boot /system/vendor/bin/sh /system/etc/usf_post_boot.sh
+#    class late_start
+#    user root
+#    disabled
+#    oneshot
+#
+#on property:init.svc.bootanim=stopped
+#    start usf-post-boot
+#
+#
+#on boot
+#    insmod /system/lib/modules/adsprpc.ko
+#    insmod /system/lib/modules/mhi.ko
+## access permission for secure touch
+#    chmod 0660 /sys/devices/f9966000.i2c/i2c-1/1-004a/secure_touch_enable
+#    chmod 0440 /sys/devices/f9966000.i2c/i2c-1/1-004a/secure_touch
+#    chmod 0660 /sys/devices/f9966000.i2c/i2c-1/1-0020/secure_touch_enable
+#    chmod 0440 /sys/devices/f9966000.i2c/i2c-1/1-0020/secure_touch
+#    chown system drmrpc /sys/devices/f9966000.i2c/i2c-1/1-004a/secure_touch_enable
+#    chown system drmrpc /sys/devices/f9966000.i2c/i2c-1/1-004a/secure_touch
+#    chown system drmrpc /sys/devices/f9966000.i2c/i2c-1/1-0020/secure_touch_enable
+#    chown system drmrpc /sys/devices/f9966000.i2c/i2c-1/1-0020/secure_touch
+#
+#
+#
 ## imsdatadaemon starts with root and UID will be downgraded to SYSTEM.
 service vendor.imsqmidaemon /system/vendor/bin/imsqmidaemon
     class main
@@ -294,6 +419,59 @@ service vendor.imsdatadaemon /system/vendor/bin/imsdatadaemon
     group system wifi radio inet log diag
     disabled
 
+#service mdm_helper /system/bin/mdm_helper
+#    class core
+#    onrestart setprop ro.service.mdm_helper_restarted "true"
+#    disabled
+#
+#service mdm_helper_proxy /system/bin/mdm_helper_proxy
+#    class core
+#    disabled
+#
+#service mdm_launcher /system/bin/sh /init.mdm.sh
+#    class main
+#    oneshot
+#
+#service qcamerasvr /system/bin/mm-qcamera-daemon
+#    class late_start
+#    user camera
+#    group camera system inet input graphics
+#
+# Stop mdm_helper_proxy in case of shutdown
+#on property:sys.shutdown.requested=*
+#    stop mdm_helper_proxy
+#
+# Stop mdm_helper_proxy on APQ target
+#on property:ro.radio.noril=yes
+#    stop mdm_helper_proxy
+#
+#on property:persist.airplane.mode.pwr.svg=enabled
+#    setprop ro.mdm_helper_proxy_req false
+#
+#on property:init.svc.ril-daemon=running
+#    setprop ro.mdm_helper_proxy_req true
+#
+## Start mdm_helper_proxy
+#on property:ro.mdm_helper_proxy_req=true
+#    start mdm_helper_proxy
+#
+## QCA1530 SoC core detect
+#service gnss-detect /system/vendor/bin/gnss.qca1530.sh detect
+#   class core
+#   oneshot
+#
+## QCA1530 SoC late_start group trigger
+#service gnss-init /system/vendor/bin/gnss.qca1530.sh init
+#   class late_start
+#   oneshot
+#
+## QCA1530 SoC Service Daemon
+#service gnss-svcd /system/vendor/bin/gnss.qca1530.sh start
+#   class late_start
+#   user root
+#   group gps system qcom_diag diag log inet net_raw
+#   disabled
+
 service vendor.imsrcsservice /system/vendor/bin/imsrcsd
     class main
     user system
@@ -301,6 +479,17 @@ service vendor.imsrcsservice /system/vendor/bin/imsrcsd
 
 on property:vendor.ims.QMI_DAEMON_STATUS=1
     start vendor.imsdatadaemon
+
+#xiaomi-wifi: removed by xiaomi bsp-wifi.
+#on property:vold.decrypt=trigger_restart_framework
+#   start cnss_diag
+
+#xiaomi-wifi: cnss_diag is already defined in init.qcom.rc, no long need to define here.
+#service cnss_diag /system/vendor/bin/cnss_diag -q -f -t HELIUM
+#   class main
+#   user system
+#   group system wifi inet sdcard_rw media_rw diag
+#   oneshot
 
 service vendor.ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    class main
@@ -311,6 +500,11 @@ on property:vendor.ims.DATA_DAEMON_STATUS=1
     restart vendor.ims_rtp_daemon
 
 service leds-sh /system/vendor/bin/sh /vendor/etc/init.leds.sh
+    class core
+    user root
+    oneshot
+
+service panel-info-sh /system/vendor/bin/sh /vendor/etc/init.panel_info.sh
     class core
     user root
     oneshot
@@ -337,6 +531,37 @@ on property:vold.decrypt=trigger_restart_framework && property:ro.crypto.type=bl
     setprop persist.ppd.fde.config 1
     start ppd
 
+#service nqs /system/bin/nqs
+#    class late_start
+#    socket nqs_qsb_comm stream 660 system system
+#    user system
+#    group drmrpc
+#
+#service adsprpcd /system/vendor/bin/adsprpcd
+#   class main
+#   user media
+#   group media
+#
+##Start picture quality tuning service
+#service vqttoolservice /system/bin/vqttoolservice
+#    class late_start
+#    socket vqtss stream 0660 system system
+#    user system
+#    group system
+
+#service hbtp /system/vendor/bin/hbtp_daemon
+#     class main
+#     user system
+#     group system
+#     capabilities SYS_NICE
+#     disabled
+
+service energy-awareness /system/vendor/bin/energy-awareness
+    class main
+    user system
+    group system
+    oneshot
+
 #minidump service
 service minidump64 /vendor/bin/minidump64
     class late_start
@@ -354,6 +579,11 @@ service vendor.hvdcp_opti /system/vendor/bin/hvdcp_opti
     user root
     group system wakelock
 
+service smcinvoked /system/bin/smcinvoked
+    class main
+    user system
+    group system
+
 service vendor.tlocd /vendor/bin/tloc_daemon
     class late_start
     user system
@@ -363,11 +593,23 @@ service displayfeature /system/bin/displayfeature
     class late_start
     user root
     group root
-    
+
+service touch_count_dump /vendor/bin/touch_count_dump
+    class late_start
+    user root
+    group root
+    oneshot
+
 service displaycount /vendor/bin/displaycount
     class late_start
     user system
     group system
+    oneshot
+
+service gpu_monitor /system/bin/gpu_monitor
+    class late_start
+    user system
+    group system sdcard_rw
     oneshot
 
 on property:init.svc.surfaceflinger=stopped

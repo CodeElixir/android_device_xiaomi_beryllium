@@ -85,9 +85,9 @@ PRODUCT_PACKAGES += \
     rcs_service_api \
     rcs_service_api.xml
 
-# Recovery
-PRODUCT_PACKAGES += \
-    librecovery_updater_xiaomi
+# # Recovery
+# PRODUCT_PACKAGES += \
+#     librecovery_updater_xiaomi
 
 # Telephony
 PRODUCT_PACKAGES += \

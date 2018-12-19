@@ -117,7 +117,7 @@ BOARD_ROOT_EXTRA_FOLDERS := persist
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wake_gesture"
 
 # QCOM
-#BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_HARDWARE := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
@@ -126,9 +126,9 @@ TARGET_HW_DISK_ENCRYPTION := true
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
-# Releasetools
-TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_xiaomi
-TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
+# # Releasetools
+# TARGET_RECOVERY_UPDATER_LIBS := librecovery_updater_xiaomi
+# TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # RenderScript
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so

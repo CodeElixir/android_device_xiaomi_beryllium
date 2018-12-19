@@ -87,8 +87,8 @@ TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 TARGET_USES_HWC2 := true
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/vintf/manifest.xml
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/vintf/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/vintf/device_manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/vintf/device_compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/vintf/framework_manifest.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := $(DEVICE_PATH)/vintf/framework_compatibility_matrix.xml
 
@@ -124,7 +124,7 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
 # # Releasetools

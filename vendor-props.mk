@@ -59,9 +59,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
-    persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac \
-    persist.vendor.btstack.enable.splita2dp=true \
-    ro.bluetooth.library_name=libbluetooth_qti.so \
     vendor.bluetooth.soc=cherokee \
     vendor.qcom.bluetooth.soc=cherokee 
 

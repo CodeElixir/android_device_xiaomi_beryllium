@@ -49,4 +49,22 @@ setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT" true "$CLEAN_VENDOR"
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 
+BLOB_ROOT="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary
+
+# Using in vendor libgui for Xiaomi displayfeature HAL
+sed -i "s|libgui.so|libPui.so|g" "$BLOB_ROOT"/vendor/lib/hw/displayfeature.default.so
+sed -i "s|libgui.so|libPui.so|g" "$BLOB_ROOT"/vendor/lib64/hw/displayfeature.default.so
+
+sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib/libgui_vendor.so
+sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib/libgui_vendor.so
+
+sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib/libPui.so
+sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib64/libPui.so
+
+sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib/libPufferhubqueue.so
+sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib64/libPufferhubqueue.so
+
+sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib/libPui.so
+sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib64/libPui.so
+
 "$MY_DIR"/setup-makefiles.sh

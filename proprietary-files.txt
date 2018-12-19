@@ -1860,6 +1860,8 @@ lib64/libpdx_default_transport.so:vendor/lib64/libPdx_default_transport.so
 lib/libgui.so:vendor/lib/libPui.so
 lib64/libgui.so:vendor/lib64/libPui.so
 
+
+
 # CNE - from enchilada - PKQ1.180716.001
 -priv-app/CNEService/CNEService.apk|0e6e64c1d39a420629e3e2aac6fdcd2baaade798
 etc/permissions/cneapiclient.xml|15831adf0e80243042b90c734eea0a68eb8ae9c9
@@ -2010,4 +2012,7 @@ framework/QtiTelephonyServicelibrary.jar|33aeaf189a3de121f9c132f6ee5d29dd99da007
 lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so:vendor/lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so|4cc3d081f38819eb0becd1038a7a146e64257d5f
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk|6b19ab624573d3604454d504ee6adb4ef9e5b4e3
 
+# Bluetooth (aptX) - from enchilada - PKQ1.180716.001
+lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
+lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 

@@ -55,9 +55,6 @@ BLOB_ROOT="$LINEAGE_ROOT"/vendor/"$VENDOR"/"$DEVICE"/proprietary
 sed -i "s|libgui.so|libPui.so|g" "$BLOB_ROOT"/vendor/lib/hw/displayfeature.default.so
 sed -i "s|libgui.so|libPui.so|g" "$BLOB_ROOT"/vendor/lib64/hw/displayfeature.default.so
 
-sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib/libgui_vendor.so
-sed -i "s|libpdx_default_transport.so|libPdx_default_transport.so|g" "$BLOB_ROOT"/vendor/lib/libgui_vendor.so
-
 sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib/libPui.so
 sed -i "s|libbufferhubqueue.so|libPufferhubqueue.so|g" "$BLOB_ROOT"/vendor/lib64/libPui.so
 

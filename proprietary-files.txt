@@ -43,7 +43,6 @@ vendor/bin/chrt
 vendor/bin/cksum
 vendor/bin/clear
 vendor/bin/cmp
-vendor/bin/cnd
 vendor/bin/cnss-daemon
 vendor/bin/cnss_diag
 vendor/bin/comm
@@ -1006,7 +1005,6 @@ vendor/lib/libgpu_tonemapper.so
 vendor/lib/libgralloccore.so
 vendor/lib/libgrallocutils.so
 vendor/lib/libgsl.so
-vendor/lib/libgui_vendor.so
 vendor/lib/libHalSuperSensorServer.so
 vendor/lib/libhbtpclient.so
 vendor/lib/libhbtpdsp.so
@@ -1186,8 +1184,6 @@ vendor/lib/libssc.so
 vendor/lib/libssc_default_listener.so
 vendor/lib/libssccalapi.so
 vendor/lib/libssd.so
-vendor/lib/libstagefright_foundation.so
-vendor/lib/libstagefright_omx.so
 vendor/lib/libstagefright_soft_qtiflacdec.so
 vendor/lib/libstagefrighthw.so
 vendor/lib/libStDrvInt.so
@@ -1856,7 +1852,10 @@ lib64/libpdx_default_transport.so:vendor/lib64/libPdx_default_transport.so
 lib/libgui.so:vendor/lib/libPui.so
 lib64/libgui.so:vendor/lib64/libPui.so
 
-
+# OMX - from enchilada - PKQ1.180716.001
+vendor/lib/vndk/libstagefright_omx.so
+vendor/lib/vndk/libstagefright_foundation.so
+vendor/lib/libgui_vendor.so
 
 # CNE - from enchilada - PKQ1.180716.001
 -priv-app/CNEService/CNEService.apk|0e6e64c1d39a420629e3e2aac6fdcd2baaade798
@@ -1879,7 +1878,12 @@ lib/com.quicinc.cne.server@1.0.so|e0be994c4af89bd47a0d2c47b91f3a66354903ec
 lib/vendor.qti.hardware.data.latency@1.0.so|818a2da27faf67dfde6e705f04359a4396c51aec
 lib64/com.quicinc.cne.server@1.0.so|4f8f31f75924fc196ce0691cae460c51c0684edf
 lib64/vendor.qti.hardware.data.latency@1.0.so|1efdc8c25dfec6aafed7a292ab509ea4f4ca955f
+vendor/bin/cnd
+vendor/lib/libcne.so
+vendor/lib/libwms.so
 vendor/lib/vendor.qti.hardware.data.latency@1.0.so|94451979b9d0217a3fe240114adc74c3a6bb159c
+vendor/lib64/libcne.so
+vendor/lib64/libwms.so
 vendor/lib64/vendor.qti.hardware.data.latency@1.0.so|534b9467495b40f678381bc085cb793718c2c0e0
 
 # DPM - from enchilada - PKQ1.180716.001
@@ -1906,7 +1910,7 @@ vendor/lib/com.qualcomm.qti.dpm.api@1.0.so|a9c8a512b2f42fc78b78742bdc461c73d32bd
 vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so|589b75fb8eba4fbe3e42895c3fbb0d83b17d5a77
 
 # IMS - from enchilada - PKQ1.180716.001
--app/ims/ims.apk|48095a727e532f4c3b6ef4fe4b5e2635a3f57b3f
+-priv-app/ims/ims.apk
 etc/permissions/com.qualcomm.qti.imscmservice-V2.0-java.xml|8d25bd7b79baf266950eb484c1a28817f891aec2
 etc/permissions/com.qualcomm.qti.imscmservice-V2.1-java.xml|998076243537f61f3683a3c083f7b27510617368
 etc/permissions/com.qualcomm.qti.imscmservice.xml|db25ef24f1937366d58a53b4f4b8923bc9e98d2d
@@ -2012,3 +2016,26 @@ lib64/vendor.qti.hardware.radio.atcmdfwd@1.0.so:vendor/lib64/vendor.qti.hardware
 lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
 lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
 
+# Misc dependencies
+lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so:vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.0.so
+lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so:vendor/lib64/vendor.xiaomi.hardware.citsensorservice@1.1.so
+lib64/vendor.xiaomi.hardware.mfidoca@1.0.so:vendor/lib64/vendor.xiaomi.hardware.mfidoca@1.0.so
+lib64/vendor.xiaomi.hardware.mlipay@1.0.so:vendor/lib64/vendor.xiaomi.hardware.mlipay@1.0.so
+lib64/vendor.xiaomi.hardware.mlipay@1.1.so:vendor/lib64/vendor.xiaomi.hardware.mlipay@1.1.so
+lib64/vendor.xiaomi.hardware.mtdservice@1.0.so:vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.0.so
+lib64/vendor.xiaomi.hardware.mtdservice@1.1.so:vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.1.so
+lib64/vendor.xiaomi.hardware.mtdservice@1.2.so:vendor/lib64/vendor.xiaomi.hardware.mtdservice@1.2.so
+lib64/vendor.xiaomi.hardware.tidaservice@1.0.so:vendor/lib64/vendor.xiaomi.hardware.tidaservice@1.0.so
+lib64/vendor.xiaomi.hardware.tidaservice@1.1.so:vendor/lib64/vendor.xiaomi.hardware.tidaservice@1.1.so
+lib/android.hardware.soundtrigger@2.0-core.so:vendor/lib/android.hardware.soundtrigger@2.0-core.so
+lib/vendor.xiaomi.hardware.citsensorservice@1.0.so:vendor/lib/vendor.xiaomi.hardware.citsensorservice@1.0.so
+lib/vendor.xiaomi.hardware.citsensorservice@1.1.so:vendor/lib/vendor.xiaomi.hardware.citsensorservice@1.1.so
+lib/vendor.xiaomi.hardware.mfidoca@1.0.so:vendor/lib/vendor.xiaomi.hardware.mfidoca@1.0.so
+lib/vendor.xiaomi.hardware.mlipay@1.0.so:vendor/lib/vendor.xiaomi.hardware.mlipay@1.0.so
+lib/vendor.xiaomi.hardware.mlipay@1.1.so:vendor/lib/vendor.xiaomi.hardware.mlipay@1.1.so
+lib/vendor.xiaomi.hardware.mtdservice@1.0.so:vendor/lib/vendor.xiaomi.hardware.mtdservice@1.0.so
+lib/vendor.xiaomi.hardware.mtdservice@1.1.so:vendor/lib/vendor.xiaomi.hardware.mtdservice@1.1.so
+lib/vendor.xiaomi.hardware.mtdservice@1.2.so:vendor/lib/vendor.xiaomi.hardware.mtdservice@1.2.so
+lib/vendor.xiaomi.hardware.tidaservice@1.0.so:vendor/lib/vendor.xiaomi.hardware.tidaservice@1.0.so
+lib/vendor.xiaomi.hardware.tidaservice@1.1.so:vendor/lib/vendor.xiaomi.hardware.tidaservice@1.1.so
+lib/vendor.xiaomi.hardware.vsimapp@1.0.so:vendor/lib/vendor.xiaomi.hardware.vsimapp@1.0.so

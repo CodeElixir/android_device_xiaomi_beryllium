@@ -860,7 +860,6 @@ vendor/lib/hw/lights.sdm845.so
 vendor/lib/hw/local_time.default.so
 vendor/lib/hw/memtrack.sdm845.so
 vendor/lib/hw/power.default.so
-vendor/lib/hw/power.qcom.so
 vendor/lib/hw/sound_trigger.primary.sdm845.so
 vendor/lib/hw/thermal.sdm845.so
 vendor/lib/hw/vendor.qti.esepowermanager@1.0-impl.so
@@ -1419,7 +1418,6 @@ vendor/lib64/hw/lights.sdm845.so
 vendor/lib64/hw/local_time.default.so
 vendor/lib64/hw/memtrack.sdm845.so
 vendor/lib64/hw/power.default.so
-vendor/lib64/hw/power.qcom.so
 vendor/lib64/hw/sound_trigger.primary.sdm845.so
 vendor/lib64/hw/thermal.sdm845.so
 vendor/lib64/hw/vendor.qti.esepowermanager@1.0-impl.so

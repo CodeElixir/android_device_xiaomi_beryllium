@@ -116,6 +116,7 @@ BOARD_ROOT_EXTRA_FOLDERS := persist
 
 # Power
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/wake_gesture"
+TARGET_USES_INTERACTION_BOOST := true
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true

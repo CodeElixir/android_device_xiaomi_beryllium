@@ -9,6 +9,7 @@ endif
 LOCAL_MODULE := power.qcom
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE_TAGS := optional
+LOCAL_VENDOR_MODULE := true
 
 LOCAL_SRC_FILES := \
     hint-data.c \

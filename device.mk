@@ -69,7 +69,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-service-qti
+    power.qcom
 
 # Lights
 PRODUCT_PACKAGES += \

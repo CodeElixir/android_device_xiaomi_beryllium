@@ -40,6 +40,9 @@ ifeq ($(TARGET_PREBUILT_KERNEL),)
   TARGET_KERNEL_CONFIG := beryllium_defconfig
 endif
 
+# Use Snapdragon LLVM, if available
+TARGET_USE_SDCLANG := true
+
 # Assertion
 TARGET_OTA_ASSERT_DEVICE := beryllium
 

@@ -30,7 +30,6 @@ import /vendor/etc/init/hw/init.batteryd.rc
 import /vendor/etc/init/hw/init.remosaic.rc
 
 on early-init
-    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules pinctrl-wcd wcd-dsp-glink snd-soc-wcd-spi snd-soc-sdm845
     write /proc/sys/kernel/sched_boost 1
     mkdir /dsp 0771 media media
     mkdir /firmware 0771 system system
@@ -236,9 +235,6 @@ on boot
     setprop vendor.usb.dpl.inst.name "dpl"
     setprop vendor.usb.controller a600000.dwc3
     setprop sys.usb.configfs 1
-
-#Load WLAN driver
-    insmod /vendor/lib/modules/qca_cld3_wlan.ko
 
 on boot && property:persist.vendor.usb.controller.default=*
     setprop vendor.usb.controller ${persist.vendor.usb.controller.default}

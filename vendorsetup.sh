@@ -1,3 +1,3 @@
-add_lunch_combo lineage_beryllium-eng
-add_lunch_combo lineage_beryllium-user
-add_lunch_combo lineage_beryllium-userdebug
+add_lunch_combo aosp_beryllium-eng
+add_lunch_combo aosp_beryllium-user
+add_lunch_combo aosp_beryllium-userdebug

@@ -155,6 +155,5 @@ PRODUCT_PROPERTY_OVERRIDES += ro.logd.size=16M
 # prop,default overides
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.adb.secure=0 \
-    ro.secure=0 \
-    persist.sys.usb.config=mtp,adb 
+    persist.sys.usb.config=adb 
 endif

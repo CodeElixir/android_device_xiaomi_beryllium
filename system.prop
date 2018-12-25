@@ -55,3 +55,6 @@ persist.fuse_sdcard=true
 
 #system prop for RmNet Data
 persist.data.df.dev_name=rmnet_usb0
+
+# Disable adb authentication
+ro.adb.secure=0

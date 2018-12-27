@@ -166,7 +166,6 @@ vendor/bin/init.qcom.crashdata.sh
 vendor/bin/init.qcom.debug.sh
 vendor/bin/init.qcom.early_boot.sh
 vendor/bin/init.qcom.efs.sync.sh
-vendor/bin/init.qcom.post_boot.sh
 vendor/bin/init.qcom.sdio.sh
 vendor/bin/init.qcom.sensors.sh
 vendor/bin/init.qcom.sh

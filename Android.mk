@@ -46,6 +46,12 @@ ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
 	@ln -sf /vendor/dsp $(TARGET_ROOT_OUT)/dsp
 endif
 
+$(PERSIST_MOUNT_POINT):
+	@echo "Creating $(PERSIST_MOUNT_POINT)"
+ifneq ($(TARGET_MOUNT_POINTS_SYMLINKS),false)
+	@ln -sf /mnt/vendor/persist $(TARGET_ROOT_OUT)/persist
+endif
+
 IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
 IMS_SYMLINKS := $(addprefix $(TARGET_OUT_APPS_PRIVILEGED)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
 $(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)

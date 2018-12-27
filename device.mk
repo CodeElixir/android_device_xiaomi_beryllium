@@ -111,8 +111,10 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.remosaic.rc \
     init.target.rc \
-    ueventd.qcom.rc 
-
+    ueventd.qcom.rc \
+    init.thermal.sh \
+    init.qcom.post_boot.sh
+    
 # QTI
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml \

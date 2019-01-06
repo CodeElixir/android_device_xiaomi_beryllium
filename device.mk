@@ -39,6 +39,10 @@ PRODUCT_PACKAGES += \
 # Ambient Display
 PRODUCT_PACKAGES += \
     XiaomiDoze
+    
+# ThermalConfigSetter
+PRODUCT_PACKAGES += \
+	ThermalConfigSetter
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -112,7 +116,6 @@ PRODUCT_PACKAGES += \
     init.remosaic.rc \
     init.target.rc \
     ueventd.qcom.rc \
-    init.thermal.sh \
     init.qcom.post_boot.sh
     
 # QTI

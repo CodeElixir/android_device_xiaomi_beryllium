@@ -155,13 +155,6 @@ on post-fs-data
     mkdir /data/vendor/misc/display 0771 system system
     chmod 666 /sys/class/drm/card0-DSI-1/disp_count
 
-service thermalconfig-sh /vendor/bin/init.thermal.sh
-    class late_start
-    user root
-    group root
-    disabled
-    oneshot
-
 on property:ro.boot.dp=0x0
 	write  /sys/bus/platform/devices/c440000.qcom,spmi:qcom,pm8998@0:qcom,power-on@800/pshold_reboot 7
 
@@ -175,7 +168,6 @@ service charge_logger /vendor/bin/charge_logger
 
 on property:sys.boot_completed=1
     start charge_logger
-    start thermalconfig-sh
 
 # For cpusets initialize for Silver Only first and then Silver + Gold
 # Silver Only configuration cannot work with 0-7

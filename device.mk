@@ -56,6 +56,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     XiaomiParts
 
+# ThermalConfigSetter
+PRODUCT_PACKAGES += \
+    ThermalConfigSetter
+
 # Display
 PRODUCT_PACKAGES += \
     libvulkan

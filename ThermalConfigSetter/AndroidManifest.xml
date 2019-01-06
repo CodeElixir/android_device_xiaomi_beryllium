@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.lineageos.settings.device"
+    android:sharedUserId="android.uid.system"
+    >
+
+    <original-package android:name="com.cyanogenmod.settings.device" />
+
+	<uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <uses-sdk
+        android:minSdkVersion="27"
+        android:targetSdkVersion="27" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_title"
+        android:icon="@mipmap/ic_launcher"
+        android:persistent="true">
+
+        <receiver android:name="org.lineageos.settings.device.BootCompletedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.PRE_BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="org.lineageos.settings.device.ThermalConfigSetterService" 
+        		 android:permission="ThermalConfigSetterService">
+        </service>
+
+    </application>
+
+</manifest>

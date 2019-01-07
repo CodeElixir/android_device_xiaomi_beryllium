@@ -17,16 +17,12 @@
 
 package org.lineageos.settings.device;
 
-import android.app.IntentService;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.Activity;
-import android.app.Service;
 import android.content.Context;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;;
 
@@ -42,7 +38,7 @@ public class ThermalConfigSetter {
     private ActivityRunnable activityRunnable;
 
     private String foregroundApp;
-
+    
     private static final String THERMAL_MESSAGE_PATH = "/sys/class/thermal/thermal_message/sconfig";
 
   	// Supported Thermal Modes
@@ -59,7 +55,7 @@ public class ThermalConfigSetter {
     private static final String MODE_RESTORE           =   "0";
 
     public ThermalConfigSetter(Context context) {
-        if (DEBUG) Log.d(TAG, "Starting");
+        checkActivity(context);
     }
 
     private void SetThermalMode(String packagename) {
@@ -113,7 +109,7 @@ public class ThermalConfigSetter {
     protected void checkActivity(Context context) {
         activityRunnable = new ActivityRunnable(context);
         handler.postDelayed(activityRunnable, 500);
-    }
+	}
 
     protected void removeCallback() {
         handler.removeCallbacks(activityRunnable);

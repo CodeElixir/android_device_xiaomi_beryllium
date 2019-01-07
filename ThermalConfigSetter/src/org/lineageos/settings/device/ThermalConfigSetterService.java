@@ -29,21 +29,28 @@ public class ThermalConfigSetterService extends Service {
     static final String TAG = "ThermalConfigSetter";
     private static final boolean DEBUG = true;
 
+    private Context mContext;
+
+    private boolean flag;
+
     private ThermalConfigSetter mThermalConfigSetter;
 
     @Override
     public void onCreate() {
         if (DEBUG) Log.d(TAG, "Creating service");
-        mThermalConfigSetter = new ThermalConfigSetter(this);
-        IntentFilter screenStateFilter = new IntentFilter();
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        registerReceiver(mScreenStateReceiver, screenStateFilter);
+        super.onCreate();
+        mContext = this;
     }
         
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (DEBUG) Log.d(TAG, "Starting service");
+        IntentFilter screenStateFilter = new IntentFilter();
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
+        flag = false;
+        mThermalConfigSetter = new ThermalConfigSetter(mContext);
         return START_STICKY;
     }
 
@@ -52,7 +59,7 @@ public class ThermalConfigSetterService extends Service {
         if (DEBUG) Log.d(TAG, "Destroying service");
         super.onDestroy();
         mThermalConfigSetter.removeCallback();
-        this.unregisterReceiver(mScreenStateReceiver);
+        mContext.unregisterReceiver(mScreenStateReceiver);
     }
 
     @Override
@@ -62,11 +69,12 @@ public class ThermalConfigSetterService extends Service {
 
     private void ScreenOn() {
         if (DEBUG) Log.d(TAG, "Screen on");
-        mThermalConfigSetter.checkActivity(this);
+        mThermalConfigSetter.checkActivity(mContext);
     }
 
     private void ScreenOff() {
         if (DEBUG) Log.d(TAG, "Screen off");
+        flag = true;
         mThermalConfigSetter.removeCallback();
     }   
 
@@ -74,7 +82,7 @@ public class ThermalConfigSetterService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                ScreenOn();
+                if (flag) ScreenOn();
             } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 ScreenOff();
             }

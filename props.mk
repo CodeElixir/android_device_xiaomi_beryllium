@@ -54,9 +54,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.video=true \
     media.settings.xml=/system/etc/media_profiles_vendor.xml
 
-# Memory optimizations
+# Props to modify for app memory
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.qti.sys.fw.bservice_enable=true
+    ro.vendor.qti.sys.fw.bservice_enable=true \
+    ro.vendor.qti.sys.fw.bservice_limit=5 \
+    ro.vendor.qti.sys.fw.bservice_age=5000
+
+# Property to enable app trigger
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.at_library=libqti-at.so \
+    persist.vendor.qti.games.gt.prof=1
 
 # Netflix custom property
 PRODUCT_PROPERTY_OVERRIDES += \

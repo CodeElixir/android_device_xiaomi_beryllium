@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2019 The LineageOS Project
+ *               2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,28 +27,22 @@ import android.support.v7.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
-
-import static android.provider.Settings.Secure.DOZE_ALWAYS_ON;
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 
-public final class DozeUtils {
+public final class Utils {
 
     private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
 
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
 
-    protected static final String ALWAYS_ON_DISPLAY = "always_on_display";
-
-    protected static final String CATEG_PICKUP_SENSOR = "pickup_sensor";
     protected static final String CATEG_PROX_SENSOR = "proximity_sensor";
 
     protected static final String GESTURE_PICK_UP_KEY = "gesture_pick_up";
     protected static final String GESTURE_HAND_WAVE_KEY = "gesture_hand_wave";
     protected static final String GESTURE_POCKET_KEY = "gesture_pocket";
 
-    public static void startService(Context context) {
+    protected static void startService(Context context) {
         if (DEBUG) Log.d(TAG, "Starting service");
         context.startServiceAsUser(new Intent(context, DozeService.class),
                 UserHandle.CURRENT);
@@ -61,7 +55,7 @@ public final class DozeUtils {
     }
 
     protected static void checkDozeService(Context context) {
-        if (isDozeEnabled(context) && !isAlwaysOnEnabled(context) && sensorsEnabled(context)) {
+        if (isDozeEnabled(context) && sensorsEnabled(context)) {
             startService(context);
         } else {
             stopService(context);
@@ -84,7 +78,7 @@ public final class DozeUtils {
                 DOZE_ENABLED, enable ? 1 : 0);
     }
 
-    public static boolean isDozeEnabled(Context context) {
+    protected static boolean isDozeEnabled(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
                 DOZE_ENABLED, 1) != 0;
     }
@@ -93,20 +87,6 @@ public final class DozeUtils {
         if (DEBUG) Log.d(TAG, "Launch doze pulse");
         context.sendBroadcastAsUser(new Intent(DOZE_INTENT),
                 new UserHandle(UserHandle.USER_CURRENT));
-    }
-
-    protected static boolean enableAlwaysOn(Context context, boolean enable) {
-        return Settings.Secure.putIntForUser(context.getContentResolver(),
-                DOZE_ALWAYS_ON, enable ? 1 : 0, UserHandle.USER_CURRENT);
-    }
-
-    private static boolean isAlwaysOnEnabled(Context context) {
-        return Settings.Secure.getIntForUser(context.getContentResolver(),
-                DOZE_ALWAYS_ON, 1, UserHandle.USER_CURRENT) != 0;
-    }
-
-    protected static boolean alwaysOnDisplayAvailable(Context context) {
-        return new AmbientDisplayConfiguration(context).alwaysOnAvailable();
     }
 
     protected static void enableGesture(Context context, String gesture, boolean enable) {
@@ -131,7 +111,7 @@ public final class DozeUtils {
         return isGestureEnabled(context, GESTURE_POCKET_KEY);
     }
 
-    public static boolean sensorsEnabled(Context context) {
+    protected static boolean sensorsEnabled(Context context) {
         return isPickUpEnabled(context) || isHandwaveGestureEnabled(context)
                 || isPocketGestureEnabled(context);
     }

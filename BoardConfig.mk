@@ -149,5 +149,8 @@ BOARD_VNDK_RUNTIME_DISABLE := true
 BOARD_VNDK_VERSION := current
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 
+# Setting vendor SPL
+VENDOR_SECURITY_PATCH = "2018-06-05"
+
 # Inherit from the proprietary version
 -include vendor/xiaomi/beryllium/BoardConfigVendor.mk
